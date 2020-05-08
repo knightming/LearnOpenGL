@@ -11,6 +11,7 @@
 #include "glfw3.h"
 
 void windowSizeDidChangeCallback(GLFWwindow * window, int width, int height);
+void processInput(GLFWwindow *window);
 
 int main(int argc, const char * argv[]) {
     std::cout << "Hello, World!\n";
@@ -36,7 +37,16 @@ int main(int argc, const char * argv[]) {
     glad_glViewport(0, 0, 800, 600);
     glfwSetFramebufferSizeCallback(window, windowSizeDidChangeCallback);
     
+    // Render loop (a Frame)
     while (!glfwWindowShouldClose(window)) {
+        // Input
+        processInput(window);
+        
+        // Rendering Commands
+        glad_glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glad_glClear(GL_COLOR_BUFFER_BIT);
+        
+        // Check and call events and swap the buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
